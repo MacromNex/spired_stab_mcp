@@ -1,0 +1,48 @@
+{
+  "_description": "Configuration for batch mutation analysis script",
+  "_source": "Extracted from examples/use_case_4_batch_mutation_analysis.py",
+
+  "device": "cpu",
+  "output_format": "csv",
+  "progress_bar": true,
+  "max_variants": 100,
+  "save_summary": true,
+  "show_analysis": true,
+
+  "model": {
+    "type": "spired_stab",
+    "path": "scripts/data/model/SPIRED-Stab.pth",
+    "esm2_models": ["esm2_t33_650M_UR50D", "esm2_t36_3B_UR50D"]
+  },
+
+  "processing": {
+    "batch_size": 1,
+    "use_cache": true,
+    "torch_no_grad": true
+  },
+
+  "mutation_generation": {
+    "amino_acids": "ACDEFGHIKLMNPQRSTVWY",
+    "skip_wild_type": true,
+    "position_based": true,
+    "specific_mutations": true
+  },
+
+  "analysis": {
+    "stability_threshold": 0.0,
+    "show_top_stable": 5,
+    "show_top_unstable": 5,
+    "calculate_statistics": true
+  },
+
+  "output": {
+    "include_metadata": true,
+    "precision": 4,
+    "columns": ["id", "seq", "ddG", "dTm"],
+    "summary_file": true,
+    "summary_statistics": [
+      "mean", "std", "min", "max", "median",
+      "stabilizing_count", "destabilizing_count"
+    ]
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "_description": "Configuration for comparative stability analysis script",
+  "_source": "Extracted from examples/use_case_5_comparative_stability_analysis.py",
+
+  "device": "cpu",
+  "input_format": "csv",
+  "output_format": "csv",
+  "progress_bar": true,
+  "show_analysis": true,
+  "save_enhanced": true,
+  "save_report": true,
+  "stable_threshold": -1.0,
+  "unstable_threshold": 1.0,
+
+  "model": {
+    "type": "spired_stab",
+    "path": "scripts/data/model/SPIRED-Stab.pth",
+    "esm2_models": ["esm2_t33_650M_UR50D", "esm2_t36_3B_UR50D"]
+  },
+
+  "processing": {
+    "batch_size": 1,
+    "use_cache": true,
+    "torch_no_grad": true
+  },
+
+  "classification": {
+    "stability_classes": [
+      "Highly Stabilizing",
+      "Stabilizing",
+      "Neutral",
+      "Destabilizing",
+      "Highly Destabilizing"
+    ],
+    "thresholds": {
+      "highly_stabilizing": -1.0,
+      "stabilizing": 0.0,
+      "neutral": 0.0,
+      "destabilizing": 1.0
+    }
+  },
+
+  "ranking": {
+    "ddG_ascending": true,
+    "dTm_descending": true,
+    "include_percentiles": true
+  },
+
+  "analysis": {
+    "show_top_stable": 5,
+    "show_top_unstable": 5,
+    "calculate_correlation": true,
+    "generate_statistics": true
+  },
+
+  "output": {
+    "include_metadata": true,
+    "precision": 4,
+    "basic_columns": ["id", "seq", "ddG", "dTm"],
+    "enhanced_columns": [
+      "id", "seq", "ddG", "dTm", "Stability_Class",
+      "ddG_Rank", "dTm_Rank", "ddG_Percentile", "dTm_Percentile"
+    ],
+    "enhanced_file_suffix": "_enhanced",
+    "report_file_suffix": "_report",
+    "report_format": "txt"
+  },
+
+  "plotting": {
+    "enabled": false,
+    "plots": [
+      "ddG_distribution",
+      "dTm_distribution",
+      "correlation_plot",
+      "classification_pie"
+    ],
+    "output_format": "png",
+    "dpi": 300
+  }
+}

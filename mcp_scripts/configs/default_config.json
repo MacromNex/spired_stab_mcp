@@ -1,0 +1,62 @@
+{
+  "_description": "Default configuration for all SPIRED-Stab MCP scripts",
+  "_version": "1.0",
+  "_created": "2025-12-21",
+
+  "device": "cpu",
+  "progress_bar": true,
+  "output_format": "csv",
+
+  "model": {
+    "type": "spired_stab",
+    "path": "scripts/data/model/SPIRED-Stab.pth",
+    "esm2_models": {
+      "650M": "esm2_t33_650M_UR50D",
+      "3B": "esm2_t36_3B_UR50D"
+    },
+    "load_on_demand": true,
+    "cache_models": true
+  },
+
+  "processing": {
+    "batch_size": 1,
+    "use_cache": true,
+    "torch_no_grad": true,
+    "precision": "float32"
+  },
+
+  "paths": {
+    "project_root": "../..",
+    "scripts_dir": "../scripts",
+    "examples_dir": "../examples",
+    "results_dir": "../results",
+    "configs_dir": "./configs"
+  },
+
+  "output": {
+    "include_metadata": true,
+    "precision": 4,
+    "default_columns": ["id", "seq", "ddG", "dTm"],
+    "auto_generate_filename": true
+  },
+
+  "validation": {
+    "check_input_files": true,
+    "validate_sequences": true,
+    "check_sequence_lengths": true,
+    "warn_on_differences": true
+  },
+
+  "logging": {
+    "level": "INFO",
+    "show_progress": true,
+    "show_warnings": true,
+    "show_errors": true
+  },
+
+  "performance": {
+    "cpu_fallback": true,
+    "memory_efficient": true,
+    "lazy_loading": true
+  }
+}

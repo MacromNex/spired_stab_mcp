@@ -1,0 +1,28 @@
+{
+  "_description": "Configuration for CSV stability prediction script",
+  "_source": "Extracted from examples/use_case_1_csv_stability_prediction.py",
+
+  "device": "cpu",
+  "input_format": "csv",
+  "seq_column": "seq",
+  "output_format": "csv",
+  "progress_bar": true,
+
+  "model": {
+    "type": "spired_stab",
+    "path": "scripts/data/model/SPIRED-Stab.pth",
+    "esm2_models": ["esm2_t33_650M_UR50D", "esm2_t36_3B_UR50D"]
+  },
+
+  "processing": {
+    "batch_size": 1,
+    "use_cache": true,
+    "torch_no_grad": true
+  },
+
+  "output": {
+    "include_metadata": true,
+    "precision": 4,
+    "columns": ["id", "seq", "ddG", "dTm"]
+  }
+}

@@ -22,14 +22,21 @@ import tqdm
 script_dir = Path(__file__).parent.parent / "scripts"
 sys.path.insert(0, str(script_dir))
 
+# Change working directory to scripts for imports
+original_cwd = os.getcwd()
+os.chdir(str(script_dir))
+
 from src.model import SPIRED_Stab
 from src.utils_train_valid import getStabDataTest
+
+# Restore original working directory
+os.chdir(original_cwd)
 import torch
 import numpy as np
 from loguru import logger
 
 # Initialize FastMCP server
-mcp = FastMCP("SPIRED-Stab Prediction")
+mcp = FastMCP("spired_stab_mcp")
 
 # Global variables for model caching
 _model_cache = {
@@ -233,6 +240,20 @@ def predict_stability(
         - CSV input: predict_stability('/path/to/variants.csv', '/path/to/wt.fasta')
         - FASTA input: predict_stability('/path/to/variants.fasta', '/path/to/wt.fasta')
         - Default wt: predict_stability('/path/to/variants.fasta')  # uses wt.fasta in same directory
+    """
+    return predict_stability_direct(variant_file, wt_fasta_file, output_file, device)
+
+
+def predict_stability_direct(
+    variant_file: str,
+    wt_fasta_file: Optional[str] = None,
+    output_file: Optional[str] = None,
+    device: str = 'cuda:0'
+) -> str:
+    """
+    Direct function interface for predict_stability (not an MCP tool).
+
+    This is the same function as the MCP tool but can be imported and called directly.
     """
     try:
         logger.info(f"Starting SPIRED-Stab prediction for: {variant_file}")

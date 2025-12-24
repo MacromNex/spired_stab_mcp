@@ -1,0 +1,44 @@
+{
+  "_description": "Configuration for single variant prediction script",
+  "_source": "Extracted from examples/use_case_3_single_variant_prediction.py",
+
+  "device": "cpu",
+  "variant_id": "variant_1",
+  "output_format": "csv",
+  "show_interpretation": true,
+
+  "model": {
+    "type": "spired_stab",
+    "path": "scripts/data/model/SPIRED-Stab.pth",
+    "esm2_models": ["esm2_t33_650M_UR50D", "esm2_t36_3B_UR50D"]
+  },
+
+  "processing": {
+    "batch_size": 1,
+    "use_cache": true,
+    "torch_no_grad": true
+  },
+
+  "mutation_parsing": {
+    "supported_formats": ["I31L", "I31L,S3T", "I31L/S3T"],
+    "separators": [",", "/"],
+    "validate_wt_aa": true,
+    "validate_position": true
+  },
+
+  "interpretation": {
+    "stability_thresholds": {
+      "highly_stabilizing": -1.0,
+      "stabilizing": 0.0,
+      "neutral": 0.0,
+      "destabilizing": 0.0,
+      "highly_destabilizing": 1.0
+    }
+  },
+
+  "output": {
+    "include_metadata": true,
+    "precision": 4,
+    "columns": ["id", "seq", "ddG", "dTm"]
+  }
+}
