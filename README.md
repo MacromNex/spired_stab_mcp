@@ -50,14 +50,25 @@ The SPIRED-Stab MCP provides protein stability prediction capabilities using a d
 
 ## Installation
 
+### Quick Setup (Recommended)
+
+Run the automated setup script:
+
+```bash
+cd spired_stab_mcp
+bash quick_setup.sh
+```
+
+The script will create the conda environment, install PyTorch with CUDA, all dependencies, and display the Claude Code configuration. See `quick_setup.sh --help` for options like `--skip-env`.
+
 ### Prerequisites
 - Conda or Mamba (mamba recommended for faster installation)
 - Python 3.10+
 - CUDA-compatible GPU (optional but recommended for performance)
 
-### Create Environment
+### Manual Installation (Alternative)
 
-Based on the environment setup from `reports/step3_environment.md`:
+If you prefer manual installation or need to customize the setup, follow `reports/step3_environment.md`:
 
 ```bash
 # Navigate to the MCP directory
