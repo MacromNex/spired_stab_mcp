@@ -1,0 +1,16 @@
+env/
+.git/
+__pycache__/
+*.pyc
+*.pyo
+claude_outputs/
+reports/
+results/
+jobs/
+tests/
+repo/
+mcp_scripts/
+.github/
+*.md
+!examples/README.md
+tmp/
