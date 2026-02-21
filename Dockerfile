@@ -10,14 +10,8 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy model weights (SPIRED-Stab ~507MB, SPIRED-Fitness ~510MB)
-COPY scripts/data/model/ ./scripts/data/model/
-RUN chmod -R a+r /app/scripts/
-
-# Copy source code
-COPY scripts/src/ ./scripts/src/
-RUN chmod -R a+r /app/scripts/
-COPY scripts/__init__.py ./scripts/__init__.py
+# Copy source code and model weights
+COPY scripts/ ./scripts/
 RUN chmod -R a+r /app/scripts/
 COPY src/ ./src/
 RUN chmod -R a+r /app/src/
