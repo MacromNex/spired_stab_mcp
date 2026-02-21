@@ -12,12 +12,17 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy model weights (SPIRED-Stab ~507MB, SPIRED-Fitness ~510MB)
 COPY scripts/data/model/ ./scripts/data/model/
+RUN chmod -R a+r /app/scripts/
 
 # Copy source code
 COPY scripts/src/ ./scripts/src/
+RUN chmod -R a+r /app/scripts/
 COPY scripts/__init__.py ./scripts/__init__.py
+RUN chmod -R a+r /app/scripts/
 COPY src/ ./src/
+RUN chmod -R a+r /app/src/
 COPY examples/ ./examples/
+RUN chmod -R a+r /app/examples/
 
 # Create directories for jobs and temporary files
 RUN mkdir -p jobs tmp
